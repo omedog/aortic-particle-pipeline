@@ -84,10 +84,10 @@ def run_filtration(raw_input: Path, run_dir: Path, config: dict) -> dict[str, Pa
     write_trajectory_vtp(final, result_dir / "roi_filtered_trajectories.vtp")
 
     report = {
-        "raw_points": int(len(raw)), "raw_tracks": int(raw["trajid"].nunique()),
-        "length_filtered_points": int(len(length_filtered)),
+        "raw_points": len(raw), "raw_tracks": int(raw["trajid"].nunique()),
+        "length_filtered_points": len(length_filtered),
         "length_filtered_tracks": int(length_filtered["trajid"].nunique()),
-        "final_points": int(len(final)), "final_tracks": int(final["trajid"].nunique()),
+        "final_points": len(final), "final_tracks": int(final["trajid"].nunique()),
         "length_range_points": [minimum_length, maximum_length],
         "speed_range_um_per_frame": [lower_speed * 1e6, upper_speed * 1e6],
     }

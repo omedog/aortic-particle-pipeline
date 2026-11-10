@@ -6,3 +6,4 @@ work/
 results/
 demo_run/
 *.egg-info/
+uv.lock

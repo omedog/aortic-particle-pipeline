@@ -7,7 +7,6 @@ from xml.sax.saxutils import escape
 import numpy as np
 import pandas as pd
 
-
 POINT_COLUMNS = ["trajid", "time", "x", "y", "z"]
 VELOCITY_COLUMNS = ["vx_fd", "vy_fd", "vz_fd", "speed_fd"]
 

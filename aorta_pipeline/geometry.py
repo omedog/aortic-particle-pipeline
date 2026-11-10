@@ -15,7 +15,7 @@ class ProjectedROI:
     yz_polygon: np.ndarray | None = None
 
     @classmethod
-    def from_json(cls, path: Path) -> "ProjectedROI":
+    def from_json(cls, path: Path) -> ProjectedROI:
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         if data.get("point_rule", "all_points_inside") != "all_points_inside":
             raise ValueError("Only the all_points_inside geometry rule is supported")

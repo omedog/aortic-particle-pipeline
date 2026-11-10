@@ -1,19 +1,18 @@
 """Tk desktop front end for the self-contained processing pipeline."""
 from __future__ import annotations
 
-import os
 import json
+import os
 import queue
 import subprocess
 import sys
 import threading
-from pathlib import Path
 import tkinter as tk
+from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
 from .settings import PACKAGE_ROOT
 from .synthetic import generate_synthetic_dataset
-
 
 STAGE_HELP = {
     "all": "Run filtration, Eulerian extraction, Lagrangian extension/cohorts, and validation.",

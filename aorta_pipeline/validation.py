@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,7 +34,7 @@ def run_validation(trajectory_path: Path, run_dir: Path, config: dict) -> Path:
         step_displacements = np.linalg.norm(np.diff(positions, axis=0), axis=1)
         typical_step = float(step_displacements.mean()) if len(step_displacements) else np.nan
         for fraction in settings["truncation_fractions"]:
-            cutoff = max(1, min(len(full) - 2, int(round(float(fraction) * len(full)))))
+            cutoff = max(1, min(len(full) - 2, round(float(fraction) * len(full))))
             known, hidden = full.iloc[:cutoff + 1].copy(), full.iloc[cutoff + 1:].copy()
             reconstructed, summary = extend_track_forward(model, known, roi, maximum_duration)
             virtual = reconstructed[reconstructed["source_type"] == "virtual_lagrangian"]
@@ -41,7 +42,7 @@ def run_validation(trajectory_path: Path, run_dir: Path, config: dict) -> Path:
             cutoff_time, hidden_end = float(known["time"].iloc[-1]), float(hidden["time"].iloc[-1])
             matched = []
             for _, row in virtual.iterrows():
-                frame = int(round(row["time"]))
+                frame = round(row["time"])
                 if frame not in truth.index:
                     continue
                 actual = truth.loc[frame].to_numpy(float)

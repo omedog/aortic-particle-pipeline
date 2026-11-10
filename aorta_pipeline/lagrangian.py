@@ -11,7 +11,6 @@ from .flowmap import FlowParameters, ScatteredFlowMap, extend_track_forward
 from .geometry import DirectedLine, ProjectedROI, load_lines
 from .io import file_sha256, write_points_vtp, write_pvd
 
-
 _worker_model: ScatteredFlowMap | None = None
 _worker_table: pd.DataFrame | None = None
 _worker_roi: ProjectedROI | None = None
@@ -66,7 +65,7 @@ def run_extension(trajectory_path: Path, run_dir: Path, config: dict, *, track_l
         "trajectory_size_bytes": input_stat.st_size,
         "trajectory_sha256": file_sha256(trajectory_path),
         "roi_sha256": file_sha256(Path(config["geometry"]["roi"])),
-        "n_requested_tracks": int(len(ids)),
+        "n_requested_tracks": len(ids),
         "first_track_id": int(ids[0]) if len(ids) else None,
         "last_track_id": int(ids[-1]) if len(ids) else None,
         "flowmap": config["flowmap"], "extension": settings,

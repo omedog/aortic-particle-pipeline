@@ -8,7 +8,6 @@ from pathlib import Path
 import numpy as np
 import zarr
 
-
 SYNTHETIC_CONFIG = {
     "filtration": {
         "min_length": 20,

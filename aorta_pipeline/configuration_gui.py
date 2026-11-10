@@ -1,12 +1,12 @@
 """Interactive filter, projected-geometry, line, and cohort configuration."""
 from __future__ import annotations
 
-from copy import deepcopy
 import json
 import queue
 import threading
-from pathlib import Path
 import tkinter as tk
+from copy import deepcopy
+from pathlib import Path
 from tkinter import messagebox, simpledialog, ttk
 
 import numpy as np
@@ -16,7 +16,6 @@ from matplotlib.widgets import PolygonSelector, SpanSelector
 
 from .preview import FilterPreview, compute_filter_preview
 from .settings import load_settings
-
 
 PROJECTIONS = {
     "xy_polygon": (0, 1, "XY", "x (m)", "y (m)"),
@@ -320,8 +319,8 @@ class ConfigurationDialog:
         axis.legend(frameon=False)
 
     def _length_selected(self, lower, upper):
-        self.min_length_var.set(str(max(2, int(round(lower)))))
-        self.max_length_var.set(str(max(2, int(round(upper)))))
+        self.min_length_var.set(str(max(2, round(lower))))
+        self.max_length_var.set(str(max(2, round(upper))))
 
     def _speed_selected(self, lower, upper):
         self.min_speed_var.set(f"{max(0.0, lower):.3f}")

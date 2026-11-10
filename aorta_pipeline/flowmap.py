@@ -36,7 +36,7 @@ class FlowParameters:
     crossing_bisection_iterations: int = 30
 
     @classmethod
-    def from_settings(cls, values: dict) -> "FlowParameters":
+    def from_settings(cls, values: dict) -> FlowParameters:
         return cls(**{name: values[name] for name in cls.__dataclass_fields__ if name in values})
 
 
@@ -220,7 +220,7 @@ class ScatteredFlowMap:
         self._frames: dict[int, tuple[np.ndarray, np.ndarray, np.ndarray]] = {}
         self._indices: OrderedDict[int, NeighborIndex] = OrderedDict()
 
-    def fit(self, trajectories: pd.DataFrame) -> "ScatteredFlowMap":
+    def fit(self, trajectories: pd.DataFrame) -> ScatteredFlowMap:
         required = {"track_id", "time", "x", "y", "z"}
         table = trajectories.rename(columns={"trajid": "track_id"}).copy()
         if missing := sorted(required.difference(table.columns)):
@@ -283,7 +283,7 @@ def extend_track_forward(model: ScatteredFlowMap, measured: pd.DataFrame, roi: P
     virtual_rows = []
     step_dt = model.parameters.lag_frames
     for step_index in range(maximum_duration // step_dt):
-        prediction = model.predict(point, int(round(time)))
+        prediction = model.predict(point, round(time))
         if not prediction.support_valid or prediction.confidence_score < model.parameters.minimum_confidence:
             status = "insufficient_lagrangian_support"
             virtual_rows.append({

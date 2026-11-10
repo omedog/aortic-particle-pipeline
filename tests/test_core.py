@@ -7,7 +7,11 @@ import numpy as np
 import pandas as pd
 
 from aorta_pipeline.filtering import finite_difference_velocity
-from aorta_pipeline.flowmap import FlowParameters, ScatteredFlowMap, extend_track_forward
+from aorta_pipeline.flowmap import (
+    FlowParameters,
+    ScatteredFlowMap,
+    extend_track_forward,
+)
 from aorta_pipeline.geometry import ProjectedROI
 from aorta_pipeline.settings import load_settings
 
